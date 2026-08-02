@@ -141,7 +141,7 @@
                 <p class="section-desc">۹ پروژه‌ی عملی با پایتون؛ روی هر کارت کلیک کن تا ویدیوی کاملش رو توی یوتیوب ببینی.</p>
 
                 <div class="projects-grid">
-                    <article class="project-card reveal" style="--accent:#3ddc73;">
+                    <article class="project-card reveal" style="--accent:#ff3b3b;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -164,7 +164,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#ffb454;">
+                    <article class="project-card reveal" style="--accent:#ff8c42;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -187,7 +187,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#63b3ff;">
+                    <article class="project-card reveal" style="--accent:#ff2e63;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -209,7 +209,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#ff6b8b;">
+                    <article class="project-card reveal" style="--accent:#e63946;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -232,7 +232,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#b18cff;">
+                    <article class="project-card reveal" style="--accent:#ff6b4a;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -255,7 +255,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#4dd8d8;">
+                    <article class="project-card reveal" style="--accent:#d72638;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -277,7 +277,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#3ddc73;">
+                    <article class="project-card reveal" style="--accent:#ff5e5e;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -300,7 +300,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#ffb454;">
+                    <article class="project-card reveal" style="--accent:#c81d25;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -323,7 +323,7 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal" style="--accent:#63b3ff;">
+                    <article class="project-card reveal" style="--accent:#ff477e;">
                         <div class="card-titlebar">
                             <span class="dot dot-red"></span>
                             <span class="dot dot-yellow"></span>
@@ -659,17 +659,45 @@
             });
         }
 
-        if ('IntersectionObserver' in window) {
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setActiveTab(entry.target.id);
-                    }
-                });
-            }, { threshold: 0.5 });
+        /* اسکرول‌اسپای مبتنی بر موقعیت اسکرول (به‌جای IntersectionObserver با threshold ثابت)،
+           چون بخش‌هایی که خیلی بلند یا خیلی کوتاه هستن (مثل projects.js یا stats.sh)
+           ممکنه هیچ‌وقت به یه نسبت ثابت از دیده‌شدن نرسن و تب‌شون فعال نشه. */
+        function updateActiveTabByScroll() {
+            const offset = (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 56) + 16;
+            const scrollPos = window.scrollY + offset;
 
-            sections.forEach(sec => navObserver.observe(sec));
+            let currentId = sections.length ? sections[0].id : null;
+            sections.forEach(sec => {
+                if (sec.offsetTop <= scrollPos) {
+                    currentId = sec.id;
+                }
+            });
+
+            const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+            if (nearBottom && sections.length) {
+                currentId = sections[sections.length - 1].id;
+            }
+
+            if (currentId) setActiveTab(currentId);
         }
+
+        let scrollSpyTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollSpyTicking) {
+                requestAnimationFrame(() => {
+                    updateActiveTabByScroll();
+                    scrollSpyTicking = false;
+                });
+                scrollSpyTicking = true;
+            }
+        }, { passive: true });
+
+        // فعال شدن آنی تب هنگام کلیک، بدون نیاز به منتظر موندن برای اسکرول
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                setActiveTab(tab.dataset.target);
+            });
+        });
 
         window.addEventListener('resize', () => {
             const activeTab = document.querySelector('.ide-tab.active');
@@ -677,9 +705,12 @@
         });
 
         window.addEventListener('load', () => {
+            updateActiveTabByScroll();
             const activeTab = document.querySelector('.ide-tab.active');
             moveIndicatorTo(activeTab);
         });
+
+        updateActiveTabByScroll();
 
         /* ============================
            افکت گلیچ روی تیتر بخش‌ها (یک‌بار، هنگام ورود به دید)
@@ -911,7 +942,7 @@
                 if (playgroundVisible) {
                     ctx.fillStyle = 'rgba(7, 9, 10, 0.08)';
                     ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-                    ctx.fillStyle = 'rgba(61, 220, 115, 0.55)';
+                    ctx.fillStyle = 'rgba(255, 59, 59, 0.55)';
                     ctx.font = fontSize + 'px monospace';
 
                     for (let i = 0; i < drops.length; i++) {
