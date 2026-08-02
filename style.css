@@ -1,0 +1,150 @@
+/* ======================================== */
+/* استایل‌های صفحه CMD (ترمینال ویندوز)      */
+/* ======================================== */
+
+.cmd-body {
+    background: #000000;
+    font-family: 'Consolas', 'Courier New', monospace;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cmd-container {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0,255,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cmd-screen {
+    background: #0a0a0a;
+    border: 1px solid #33ff33;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cmd-header {
+    background: #1a1a1a;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #33ff33;
+}
+
+.cmd-title {
+    color: #33ff33;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.cmd-close {
+    color: #ff3333;
+    cursor: default;
+    font-size: 14px;
+}
+
+.cmd-content {
+    padding: 20px;
+    min-height: 400px;
+}
+
+.welcome-message {
+    color: #33ff33;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.ascii-art {
+    color: #33ff33;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+    white-space: pre;
+    font-family: monospace;
+}
+
+.cmd-prompt {
+    margin: 30px 0 20px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prompt-sign {
+    color: #33ff33;
+}
+
+.blinking-cursor {
+    color: #33ff33;
+    font-weight: bold;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.instruction {
+    margin-top: 50px;
+    color: #888;
+    font-size: 14px;
+    border-top: 1px solid #33ff33;
+    padding-top: 20px;
+}
+
+.cmd-highlight {
+    color: #ffff33;
+    font-weight: bold;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* خط فرمان برای تایپ */
+.cmd-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cmd-path {
+    color: #33ff33;
+}
+
+.cmd-text {
+    color: white;
+}
+
+.output-line {
+    color: #aaa;
+    margin: 5px 0;
+}
+
+/* ریسپانسیو برای موبایل */
+@media (max-width: 600px) {
+    .cmd-container {
+        margin: 10px;
+    }
+    
+    .ascii-art {
+        font-size: 8px;
+    }
+    
+    .cmd-content {
+        padding: 15px;
+    }
+    
+    .instruction {
+        font-size: 11px;
+    }
+}

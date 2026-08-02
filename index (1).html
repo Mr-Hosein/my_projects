@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMD Portal - Welcome</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* استایل‌های مربوط به درگ کردن و آیکون بستن پنجره */
+        .cmd-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            cursor: default;
+        }
+
+        .cmd-header {
+            cursor: grab;
+            user-select: none;
+        }
+
+        .cmd-header.dragging {
+            cursor: grabbing;
+        }
+
+        .cmd-close {
+            cursor: pointer;
+        }
+
+        /* آیکون سه‌بعدی CMD وقتی پنجره بسته میشه */
+        .cmd-taskbar-icon {
+            position: fixed;
+            top: 0;
+            left: 30px;
+            width: 68px;
+            height: 68px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            z-index: 9999;
+            border-radius: 16px;
+            background: linear-gradient(145deg, #1e1e1e, #060606);
+            border: 1px solid #262626;
+            box-shadow:
+                6px 6px 14px rgba(0, 0, 0, 0.65),
+                -4px -4px 10px rgba(255, 255, 255, 0.04),
+                inset 0 1px 1px rgba(255, 255, 255, 0.06),
+                0 0 22px rgba(51, 255, 51, 0.35);
+            touch-action: none;
+        }
+
+        .cmd-taskbar-icon.show {
+            display: flex;
+        }
+
+        .cmd-taskbar-icon.icon-dragging {
+            cursor: grabbing;
+            transition: none;
+            box-shadow:
+                2px 2px 6px rgba(0, 0, 0, 0.6),
+                inset 2px 2px 4px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(51, 255, 51, 0.6);
+        }
+
+        /* "صفحه‌ی" داخلی آیکون شبیه مانیتور کوچیک */
+        .cmd-taskbar-icon .icon-screen {
+            width: 44px;
+            height: 34px;
+            border-radius: 5px;
+            background: radial-gradient(circle at 50% 30%, #0f2b0f 0%, #050805 80%);
+            border: 1px solid #2a5a2a;
+            box-shadow:
+                inset 0 0 6px rgba(51, 255, 51, 0.5),
+                inset 0 2px 3px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* افکت براق (gloss) بالای آیکون */
+        .cmd-taskbar-icon::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            right: 6px;
+            height: 40%;
+            border-radius: 14px 14px 40% 40% / 14px 14px 60% 60%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0));
+            pointer-events: none;
+        }
+
+        .cmd-taskbar-icon .icon-screen span {
+            color: #33ff33;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 15px;
+            text-shadow: 0 0 6px rgba(51, 255, 51, 0.9), 0 0 12px rgba(51, 255, 51, 0.5);
+        }
+    </style>
+</head>
+<body class="cmd-body">
+    <div class="cmd-container" id="cmdContainer">
+        <div class="cmd-screen">
+            <div class="cmd-header" id="cmdHeader">
+                <span class="cmd-title">Microsoft Windows [Version 10.0.22621.6060]</span>
+                <span class="cmd-close" id="cmdClose">✕</span>
+            </div>
+            <div class="cmd-content">
+                <div class="output-line" id="output"></div>
+
+                <!-- پیام خوش‌آمدگویی -->
+                <div class="welcome-message" id="welcomeMsg">
+                    <div class="ascii-art">
+                        ╔══════════════════════════════════════════╗<br>
+                        ║     WELCOME TO MY PORTFOLIO TERMINAL      ║<br>
+                        ╚══════════════════════════════════════════╝
+                    </div>
+                    <div class="cmd-prompt">
+                        <span class="prompt-sign">C:\Users\Visitor&gt;</span>
+                        <span class="cmd-typed" id="cmdTyped"></span><span class="blinking-cursor">_</span>
+                    </div>
+                    <div class="instruction">
+                        Please type <span class="cmd-highlight">START</span> and press Enter to continue...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- آیکون تسک‌بار برای وقتی که پنجره بسته میشه -->
+    <div class="cmd-taskbar-icon" id="taskbarIcon">
+        <div class="icon-screen">
+            <span>&gt;_</span>
+        </div>
+    </div>
+
+    <script>
+        // المنت‌های صفحه
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        const cmdContainer = document.getElementById('cmdContainer');
+        const cmdHeader = document.getElementById('cmdHeader');
+        const cmdClose = document.getElementById('cmdClose');
+        const taskbarIcon = document.getElementById('taskbarIcon');
+
+        // المنتی که متن تایپ‌شده رو نشون میده (کنار پرامپت پایینی)
+        const cmdTyped = document.getElementById('cmdTyped');
+
+        // ساخت input مخفی برای دریافت ورودی
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'text';
+        hiddenInput.id = 'hiddenInput';
+        hiddenInput.style.position = 'absolute';
+        hiddenInput.style.opacity = '0';
+        hiddenInput.style.left = '-9999px';
+        document.body.appendChild(hiddenInput);
+
+        // فوکوس روی input مخفی
+        hiddenInput.focus();
+
+        // هر بار کاربر تایپ می‌کنه، متن رو کنار پرامپت نشون بده
+        hiddenInput.addEventListener('input', function() {
+            cmdTyped.textContent = hiddenInput.value;
+        });
+
+        // دریافت ورودی از کاربر
+        hiddenInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = hiddenInput.value.trim().toUpperCase();
+                hiddenInput.value = '';
+                cmdTyped.textContent = ''; // بعد از Enter پاک بشه
+
+                if (command === 'START') {
+                    // هدایت به صفحه اصلی
+                    window.location.href = 'home.html';
+                } else if (command !== '') {
+                    // پیام خطا برای دستور اشتباه
+                    alert('Invalid command! Please type START to continue.');
+                }
+            }
+        });
+
+        // اطمینان از فوکوس روی صفحه (فقط وقتی پنجره باز باشه)
+        document.body.addEventListener('click', function(e) {
+            if (cmdContainer.style.display !== 'none') {
+                hiddenInput.focus();
+            }
+        });
+
+        // نمایش cursor چشمک زن
+        function updateCursor() {
+            const cursor = document.querySelector('.blinking-cursor');
+            if (cursor) {
+                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            }
+        }
+
+        setInterval(updateCursor, 500);
+
+        /* ============================
+           قابلیت درگ کردن پنجره (Draggable Window)
+        ============================ */
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        function setInitialPosition() {
+            // موقعیت اولیه‌ی پنجره رو بر اساس محل فعلیش (وسط صفحه) محاسبه می‌کنیم
+            const rect = cmdContainer.getBoundingClientRect();
+            cmdContainer.style.width = rect.width + 'px';
+            cmdContainer.style.left = rect.left + 'px';
+            cmdContainer.style.top = rect.top + 'px';
+            cmdContainer.style.transform = 'none';
+            cmdContainer.style.margin = '0';
+        }
+
+        cmdHeader.addEventListener('mousedown', function(e) {
+            // اگه روی دکمه‌ی ضربدر کلیک شد، درگ شروع نشه
+            if (e.target === cmdClose) return;
+
+            // اگه اولین باره که پنجره جابه‌جا میشه، موقعیتش رو ثابت کن
+            if (!cmdContainer.style.left) {
+                setInitialPosition();
+            }
+
+            isDragging = true;
+            cmdHeader.classList.add('dragging');
+
+            const rect = cmdContainer.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+
+            // جلوگیری از خروج کامل پنجره از صفحه
+            const maxLeft = window.innerWidth - 100;
+            const maxTop = window.innerHeight - 50;
+            newLeft = Math.max(-cmdContainer.offsetWidth + 100, Math.min(newLeft, maxLeft));
+            newTop = Math.max(0, Math.min(newTop, maxTop));
+
+            cmdContainer.style.left = newLeft + 'px';
+            cmdContainer.style.top = newTop + 'px';
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isDragging) {
+                isDragging = false;
+                cmdHeader.classList.remove('dragging');
+            }
+        });
+
+        // پشتیبانی از لمس (موبایل / تبلت)
+        cmdHeader.addEventListener('touchstart', function(e) {
+            if (e.target === cmdClose) return;
+
+            if (!cmdContainer.style.left) {
+                setInitialPosition();
+            }
+
+            isDragging = true;
+            const touch = e.touches[0];
+            const rect = cmdContainer.getBoundingClientRect();
+            offsetX = touch.clientX - rect.left;
+            offsetY = touch.clientY - rect.top;
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            const touch = e.touches[0];
+
+            let newLeft = touch.clientX - offsetX;
+            let newTop = touch.clientY - offsetY;
+
+            cmdContainer.style.left = newLeft + 'px';
+            cmdContainer.style.top = newTop + 'px';
+        });
+
+        document.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+
+        /* ============================
+           بستن پنجره و نمایش آیکون (با افت فیزیکی)
+        ============================ */
+        cmdClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            cmdContainer.style.display = 'none';
+            taskbarIcon.classList.add('show');
+            dropIcon();
+        });
+
+        // بازکردن دوباره‌ی پنجره با دابل‌کلیک روی آیکون
+        taskbarIcon.addEventListener('dblclick', function() {
+            cmdContainer.style.display = 'block';
+            taskbarIcon.classList.remove('show');
+            hiddenInput.focus();
+        });
+
+        /* ============================
+           فیزیک آیکون: افتادن مستقیم با جاذبه (بدون لغزش افقی) + گرفتن و پرتاب با موس
+        ============================ */
+        const ICON_SIZE = 68;
+        const GRAVITY = 0.7;
+        const BOUNCE_DAMPING = 0.55;
+        const STOP_VELOCITY = 0.4;
+        const EDGE_MARGIN = 12;
+        const ANGULAR_FRICTION = 0.97;
+
+        let iconX = 30;
+        let iconY = -100;
+        let iconVY = 0;
+        let iconAngle = 0;
+        let iconAngularVelocity = 0;
+        let isIconDragging = false;
+        let iconDragOffsetX = 0;
+        let iconDragOffsetY = 0;
+        let lastPointerX = 0;
+        let lastPointerY = 0;
+        let lastPointerTime = 0;
+        let dragVX = 0; // فقط برای محاسبه‌ی چرخش لحظه‌ی رها کردن، هیچ اثری روی جابه‌جایی افقی نداره
+        let physicsRunning = false;
+
+        function setIconPosition(x, y) {
+            taskbarIcon.style.left = x + 'px';
+            taskbarIcon.style.top = y + 'px';
+            taskbarIcon.style.transform = 'rotate(' + iconAngle + 'deg)';
+        }
+
+        function startIconPhysics() {
+            if (physicsRunning) return;
+            physicsRunning = true;
+            requestAnimationFrame(iconPhysicsLoop);
+        }
+
+        function iconPhysicsLoop() {
+            if (!taskbarIcon.classList.contains('show')) {
+                physicsRunning = false;
+                return;
+            }
+
+            if (!isIconDragging) {
+                // توجه: هیچ تغییری روی iconX داده نمیشه، پس هیچ لغزش افقی‌ای وجود نداره
+                iconVY += GRAVITY;
+                iconY += iconVY;
+
+                iconAngle += iconAngularVelocity;
+                iconAngularVelocity *= ANGULAR_FRICTION;
+
+                const floorY = window.innerHeight - ICON_SIZE - EDGE_MARGIN;
+                const ceilingY = EDGE_MARGIN;
+
+                if (iconY > floorY) {
+                    iconY = floorY;
+                    iconVY = -iconVY * BOUNCE_DAMPING;
+                    if (Math.abs(iconVY) < STOP_VELOCITY) iconVY = 0;
+                }
+                if (iconY < ceilingY) {
+                    iconY = ceilingY;
+                    iconVY = -iconVY * BOUNCE_DAMPING;
+                }
+
+                // وقتی آیکون تقریباً آروم گرفت، زاویه‌اش رو به نزدیک‌ترین حالت "صاف ایستاده" برمی‌گردونیم
+                const isResting = Math.abs(iconVY) < 0.05 && iconY >= floorY - 1;
+                if (isResting) {
+                    iconAngularVelocity *= 0.8;
+                    const nearestUpright = Math.round(iconAngle / 360) * 360;
+                    iconAngle += (nearestUpright - iconAngle) * 0.08;
+                    if (Math.abs(iconAngularVelocity) < 0.02) iconAngularVelocity = 0;
+                }
+
+                setIconPosition(iconX, iconY);
+            }
+
+            requestAnimationFrame(iconPhysicsLoop);
+        }
+
+        // هر بار که پنجره بسته میشه، آیکون از بالای صفحه فقط عمودی سقوط می‌کنه (بدون لغزش)
+        function dropIcon() {
+            iconX = 30;
+            iconY = -100;
+            iconVY = 0;
+            iconAngle = 0;
+            iconAngularVelocity = (Math.random() - 0.5) * 8;
+            setIconPosition(iconX, iconY);
+            startIconPhysics();
+        }
+
+        // گرفتن آیکون با موس
+        taskbarIcon.addEventListener('mousedown', function(e) {
+            isIconDragging = true;
+            dragVX = 0;
+            iconVY = 0;
+            taskbarIcon.classList.add('icon-dragging');
+
+            const rect = taskbarIcon.getBoundingClientRect();
+            iconDragOffsetX = e.clientX - rect.left;
+            iconDragOffsetY = e.clientY - rect.top;
+            lastPointerX = e.clientX;
+            lastPointerY = e.clientY;
+            lastPointerTime = performance.now();
+
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            if (!isIconDragging) return;
+
+            const now = performance.now();
+            const dt = Math.max(now - lastPointerTime, 1);
+
+            iconX = e.clientX - iconDragOffsetX;
+            iconY = e.clientY - iconDragOffsetY;
+
+            // محاسبه سرعت لحظه‌ای موس؛ فقط برای چرخش هنگام رها کردن استفاده میشه، نه جابه‌جایی افقی
+            dragVX = (e.clientX - lastPointerX) / dt * 16;
+            iconVY = (e.clientY - lastPointerY) / dt * 16;
+
+            setIconPosition(iconX, iconY);
+
+            lastPointerX = e.clientX;
+            lastPointerY = e.clientY;
+            lastPointerTime = now;
+        });
+
+        document.addEventListener('mouseup', function() {
+            if (isIconDragging) {
+                isIconDragging = false;
+                taskbarIcon.classList.remove('icon-dragging');
+                // سرعت افقی لحظه‌ی رها کردن فقط تبدیل به چرخش میشه، نه لغزش
+                iconAngularVelocity += dragVX * 0.6;
+                startIconPhysics(); // جاذبه دوباره روی آیکون اثر می‌کنه تا بیفته پایین
+            }
+        });
+
+        // پشتیبانی از لمس (موبایل / تبلت)
+        taskbarIcon.addEventListener('touchstart', function(e) {
+            isIconDragging = true;
+            dragVX = 0;
+            iconVY = 0;
+            taskbarIcon.classList.add('icon-dragging');
+
+            const touch = e.touches[0];
+            const rect = taskbarIcon.getBoundingClientRect();
+            iconDragOffsetX = touch.clientX - rect.left;
+            iconDragOffsetY = touch.clientY - rect.top;
+            lastPointerX = touch.clientX;
+            lastPointerY = touch.clientY;
+            lastPointerTime = performance.now();
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (!isIconDragging) return;
+            const touch = e.touches[0];
+
+            const now = performance.now();
+            const dt = Math.max(now - lastPointerTime, 1);
+
+            iconX = touch.clientX - iconDragOffsetX;
+            iconY = touch.clientY - iconDragOffsetY;
+
+            dragVX = (touch.clientX - lastPointerX) / dt * 16;
+            iconVY = (touch.clientY - lastPointerY) / dt * 16;
+
+            setIconPosition(iconX, iconY);
+
+            lastPointerX = touch.clientX;
+            lastPointerY = touch.clientY;
+            lastPointerTime = now;
+        });
+
+        document.addEventListener('touchend', function() {
+            if (isIconDragging) {
+                isIconDragging = false;
+                taskbarIcon.classList.remove('icon-dragging');
+                iconAngularVelocity += dragVX * 0.6;
+                startIconPhysics();
+            }
+        });
+    </script>
+</body>
+</html>
