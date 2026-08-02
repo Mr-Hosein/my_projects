@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حسین علی بخشی | طراح و توسعه‌دهنده بک اند و ابزار های هوش مصنوعی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home_style.css">
+</head>
+<body>
+
+    <!-- نوار پیشرفت اسکرول -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- افکت خطوط ریز پس‌زمینه (Scanline) -->
+    <div class="scanline-overlay" aria-hidden="true"></div>
+
+    <!-- نور دنبال‌کننده‌ی موس (افکت جدید) -->
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- هدر: نوار تب‌های ادیتور کد -->
+    <header class="ide-topbar">
+        <nav class="ide-tabs" id="ideTabs">
+            <span class="tab-indicator" id="tabIndicator"></span>
+            <a href="#home" class="ide-tab active" data-target="home">
+                <span class="tab-dot"></span>home.html
+            </a>
+            <a href="#stats" class="ide-tab" data-target="stats">
+                <span class="tab-dot"></span>stats.sh
+            </a>
+            <a href="#projects" class="ide-tab" data-target="projects">
+                <span class="tab-dot"></span>projects.js
+            </a>
+            <a href="#workflow" class="ide-tab" data-target="workflow">
+                <span class="tab-dot"></span>workflow.sh
+            </a>
+            <a href="#about" class="ide-tab" data-target="about">
+                <span class="tab-dot"></span>about.json
+            </a>
+            <a href="#career" class="ide-tab" data-target="career">
+                <span class="tab-dot"></span>career.log
+            </a>
+            <a href="#playground" class="ide-tab" data-target="playground">
+                <span class="tab-dot"></span>playground.sh
+            </a>
+            <a href="#contact" class="ide-tab" data-target="contact">
+                <span class="tab-dot"></span>contact.sh
+            </a>
+        </nav>
+        <div class="ide-status">
+            <span class="status-dot"></span>
+            <span class="status-text">آنلاین و در دسترس</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- بخش Hero: ترمینال زنده -->
+        <section id="home" class="hero">
+            <div class="container hero-grid">
+                <div class="terminal-window hero-terminal">
+                    <div class="terminal-titlebar">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                        <span class="terminal-title" dir="ltr">hossein@portfolio:~</span>
+                    </div>
+                    <div class="terminal-body" id="heroTerminal" dir="ltr">
+                        <!-- خطوط با جاوااسکریپت تایپ میشن -->
+                    </div>
+                </div>
+
+                <div class="hero-side">
+                    <p class="eyebrow" dir="ltr">// backend developer and AI developer</p>
+                    <h1>
+                        سلام، من <span class="highlight">حسین علی بخشی</span> هستم
+                    </h1>
+                    <p class="hero-desc">
+                        وب‌سایت‌ها و اپلیکیشن‌هایی می‌سازم که هم زیبا به‌نظر برسن، هم درست کار کنن.
+                        تمرکزم روی رابط کاربری تمیز، تجربه‌ی روان، و کدی‌‌ست که خودم دوست دارم بخونمش.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn-primary">مشاهده‌ی نمونه‌کارها</a>
+                        <a href="#contact" class="btn-ghost">تماس با من</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش آمار زنده‌ی گیت‌هاب -->
+        <section id="stats" class="stats">
+            <div class="container">
+                <div class="terminal-window stats-terminal">
+                    <div class="terminal-titlebar">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                        <span class="terminal-title" dir="ltr">github --stats</span>
+                    </div>
+                    <div class="terminal-body stats-body" dir="ltr" id="statsBody">
+                        <div class="term-line prompt"><span class="term-prompt-sign">$ </span><span class="term-text">curl api.github.com/users/Mr-Hosein</span></div>
+                        <div class="stats-grid" id="statsGrid">
+                            <div class="stat-box">
+                                <span class="stat-number" id="statRepos" data-target="0">0</span>
+                                <span class="stat-label">public repos</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number" id="statFollowers" data-target="0">0</span>
+                                <span class="stat-label">followers</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-number" id="statStars" data-target="0">0</span>
+                                <span class="stat-label">stars earned</span>
+                            </div>
+                        </div>
+                        <div class="term-line output stats-fallback" id="statsFallback" hidden>
+                            <span class="term-output-sign">> </span>
+                            <span class="term-text">اتصال به گیت‌هاب برقرار نشد؛ مستقیم ببین: <a href="https://github.com/Mr-Hosein" target="_blank" rel="noopener noreferrer">github.com/Mr-Hosein</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- نوار متحرک تکنولوژی‌ها -->
+        <div class="tech-marquee" aria-hidden="true">
+            <div class="tech-track">
+                <span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>PHP</span><span>C#</span>
+                <span>Git/Gitlab</span><span>Linux</span><span>AI</span><span>MySQL</span><span>Bootstrap</span>
+                <span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>PHP</span><span>C#</span>
+                <span>Git/Gitlab</span><span>Linux</span><span>AI</span><span>MySQL</span><span>Bootstrap</span>
+            </div>
+        </div>
+
+        <!-- بخش پروژه‌ها -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <p class="section-eyebrow" dir="ltr">// selected work</p>
+                <h2 class="section-title glitch">نمونه‌کارها</h2>
+                <p class="section-desc">۹ پروژه‌ی عملی با پایتون؛ روی هر کارت کلیک کن تا ویدیوی کاملش رو توی یوتیوب ببینی.</p>
+
+                <div class="projects-grid">
+                    <article class="project-card reveal" style="--accent:#3ddc73;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">face_detect.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=nsZHoY-oKQk" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی تشخیص چهره در یوتیوب">
+                            <img src="https://img.youtube.com/vi/nsZHoY-oKQk/hqdefault.jpg" alt="پیش‌نمایش ویدیوی تشخیص چهره با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>تشخیص چهره با پایتون</h3>
+                            <p>شناسایی و ردیابی چهره از روی تصویر و وبکم، به‌صورت زنده.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>OpenCV</span>
+                                <span>face_recognition</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=nsZHoY-oKQk" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#ffb454;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">whatsapp_bot.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=YkOsiw6A4gc" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی ربات چت واتساپ در یوتیوب">
+                            <img src="https://img.youtube.com/vi/YkOsiw6A4gc/hqdefault.jpg" alt="پیش‌نمایش ویدیوی ربات چت خودکار واتساپ" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>ربات چت خودکار واتساپ</h3>
+                            <p>رباتی که پیام‌های واتساپ رو خودش می‌خونه و به‌صورت خودکار جواب می‌ده.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Selenium</span>
+                                <span>WhatsApp Web</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=YkOsiw6A4gc" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#63b3ff;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">telegram_bot.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=HOs2gytvQd0" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی ربات تلگرام در یوتیوب">
+                            <img src="https://img.youtube.com/vi/HOs2gytvQd0/hqdefault.jpg" alt="پیش‌نمایش ویدیوی ساخت ربات تلگرام با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>ساخت ربات تلگرام</h3>
+                            <p>یه ربات تلگرامی کامل که دستورات کاربر رو اجرا و پیام‌ها رو مدیریت می‌کنه.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>python-telegram-bot</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=HOs2gytvQd0" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#ff6b8b;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">security_suite.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=OhlCpeT_Ues" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی امنیت با پایتون در یوتیوب">
+                            <img src="https://img.youtube.com/vi/OhlCpeT_Ues/hqdefault.jpg" alt="پیش‌نمایش ویدیوی پروژه‌ی امنیت با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>پروژه‌ی امنیت با پایتون</h3>
+                            <p>کی‌لاگر، مدیریت پسورد رمزنگاری‌شده با دیتابیس، و دسترسی به کلیپ‌بورد و اسکرین‌شات.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Cryptography</span>
+                                <span>SQLite</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=OhlCpeT_Ues" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#b18cff;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">web_chat.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=BUpA57Y8UEk" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی وب‌اپ چت آنلاین در یوتیوب">
+                            <img src="https://img.youtube.com/vi/BUpA57Y8UEk/hqdefault.jpg" alt="پیش‌نمایش ویدیوی وب‌اپ چت آنلاین" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>وب‌اپ چت آنلاین</h3>
+                            <p>اپلیکیشن تحت وب برای چت آنلاین بین کاربران، با پیام‌رسانی زنده.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>WebSocket</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=BUpA57Y8UEk" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#4dd8d8;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">file_manager.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=eDT83pOEaVQ" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی فایل منیجر گرافیکی در یوتیوب">
+                            <img src="https://img.youtube.com/vi/eDT83pOEaVQ/hqdefault.jpg" alt="پیش‌نمایش ویدیوی برنامه‌ی گرافیکی File Manager" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>برنامه‌ی گرافیکی File Manager</h3>
+                            <p>یه مدیر فایل کامل با رابط گرافیکی، برای مرور و مدیریت فایل‌ها.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Tkinter</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=eDT83pOEaVQ" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#3ddc73;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">img_to_text.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=ktSk-LxIqYI" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی تبدیل عکس به متن در یوتیوب">
+                            <img src="https://img.youtube.com/vi/ktSk-LxIqYI/hqdefault.jpg" alt="پیش‌نمایش ویدیوی تبدیل عکس به متن با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>تبدیل عکس به متن (OCR)</h3>
+                            <p>استخراج متن از داخل تصویر، با تکنیک تشخیص نوری کاراکتر.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Pytesseract</span>
+                                <span>Pillow</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=ktSk-LxIqYI" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#ffb454;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">invoice_pdf.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=g3pWXdae6bo" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی ساخت فاکتور PDF در یوتیوب">
+                            <img src="https://img.youtube.com/vi/g3pWXdae6bo/hqdefault.jpg" alt="پیش‌نمایش ویدیوی ساخت فاکتور PDF با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>ساخت فاکتور PDF</h3>
+                            <p>تولید خودکار فاکتور با تاریخ شمسی، جدول اقلام، و خروجی PDF.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>pdfkit</span>
+                                <span>jdatetime</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=g3pWXdae6bo" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" style="--accent:#63b3ff;">
+                        <div class="card-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="card-filename" dir="ltr">compress_img.py</span>
+                        </div>
+                        <a class="card-preview video-preview" href="https://www.youtube.com/watch?v=JKBZvnSoZME" target="_blank" rel="noopener noreferrer" aria-label="مشاهده‌ی ویدیوی پروژه‌ی فشرده‌سازی عکس در یوتیوب">
+                            <img src="https://img.youtube.com/vi/JKBZvnSoZME/hqdefault.jpg" alt="پیش‌نمایش ویدیوی فشرده‌سازی عکس با پایتون" loading="lazy">
+                            <span class="play-btn" aria-hidden="true">▶</span>
+                        </a>
+                        <div class="card-body">
+                            <h3>فشرده‌سازی عکس</h3>
+                            <p>کاهش حجم فایل عکس با حفظ کیفیت قابل‌قبول، به‌صورت خودکار.</p>
+                            <div class="tags">
+                                <span>Python</span>
+                                <span>Pillow</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=JKBZvnSoZME" target="_blank" rel="noopener noreferrer" class="card-link">مشاهده‌ی ویدیو <span class="arrow">←</span></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش روند کاری -->
+        <section id="workflow" class="workflow">
+            <div class="container">
+                <p class="section-eyebrow" dir="ltr">// how I work</p>
+                <h2 class="section-title glitch">./workflow.sh</h2>
+                <p class="section-desc">از ایده تا تحویل، هر پروژه همین ۴ قدم رو طی می‌کنه.</p>
+
+                <div class="workflow-grid">
+                    <div class="workflow-step reveal">
+                        <span class="step-number" dir="ltr">01</span>
+                        <h3>شناخت نیاز</h3>
+                        <p>هدف، مخاطب، و محدودیت‌های پروژه رو دقیق می‌فهمم؛ قبل از هر خط کد.</p>
+                    </div>
+                    <div class="workflow-step reveal">
+                        <span class="step-number" dir="ltr">02</span>
+                        <h3>طراحی رابط</h3>
+                        <p>ساختار و ظاهر رو طراحی می‌کنم؛ چیزی که هم قشنگ باشه، هم قابل فهم.</p>
+                    </div>
+                    <div class="workflow-step reveal">
+                        <span class="step-number" dir="ltr">03</span>
+                        <h3>توسعه</h3>
+                        <p>کدنویسی تمیز، قابل نگه‌داری، و تست‌شده؛ گام‌به‌گام و شفاف با کارفرما.</p>
+                    </div>
+                    <div class="workflow-step reveal">
+                        <span class="step-number" dir="ltr">04</span>
+                        <h3>تحویل و پشتیبانی</h3>
+                        <p>راه‌اندازی نهایی، آموزش استفاده، و پشتیبانی بعد از تحویل پروژه.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش درباره‌ی من -->
+        <section id="about" class="about">
+            <div class="container about-grid">
+                <div class="about-visual reveal">
+                    <div class="terminal-window">
+                        <div class="terminal-titlebar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span class="terminal-title" dir="ltr">about.json</span>
+                        </div>
+                        <div class="terminal-body about-json" dir="ltr">
+<pre><code>{
+  <span class="c-key">"name"</span>: <span class="c-str">"Hossein Ali Bakhshi"</span>,
+  <span class="c-key">"age"</span>: <span class="c-num counter" data-target="26">0</span>,
+  <span class="c-key">"role"</span>: <span class="c-str">"backend Developer and AI Developer"</span>,
+  <span class="c-key">"experience"</span>: <span class="c-str">"7+ years"</span>,
+  <span class="c-key">"projects_completed"</span>: <span class="c-num counter" data-target="30" data-suffix="+">0</span>,
+  <span class="c-key">"status"</span>: <span class="c-str">"available_for_work"</span>
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-text reveal">
+                    <p class="section-eyebrow" dir="ltr">// about me</p>
+                    <h2 class="section-title glitch">درباره‌ی من</h2>
+                    <p>سلام! من حسین‌ام، 26 ساله، و کارم برنامه نویسی و توسعه‌ی وب و همچنین برنامه نویسی و توسعه ی مدل های هوش مصنوعی هستش.</p>
+                    <p>از چند سال پیش شروع کردم به برنامه‌نویسی، و تا امروز حداقل 30 تا پروژه ی حرفه ای انجام دادم و مدیر یک گروه بزرگ برنامه نویسی و فریلنسری هستم.</p>
+                    <p>یه وب‌سایت خوب هم باید چشم‌نواز باشه، هم روون کار کنه ما همه ی اینارو برای شما انجام میدیم</p>
+                    <div class="skills">
+                        <h3 dir="ltr">$ cat skills.txt</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>HTML/CSS</li>
+                            <li>JavaScript</li>
+                            <li>PHP</li>
+                            <li>C#</li>
+                            <li>Git/Gitlab</li>
+                            <li>Linux</li>
+                            <li>AI</li>
+                            <li>MySQL</li>
+                            <li>Bootstrap</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش مسیر حرفه‌ای -->
+        <section id="career" class="career">
+            <div class="container">
+                <p class="section-eyebrow" dir="ltr">// career.log</p>
+                <h2 class="section-title glitch">مسیر حرفه‌ای</h2>
+                <p class="section-desc">خلاصه‌ای از مسیری که تا اینجا اومدم.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <span class="timeline-dot"></span>
+                        <div class="timeline-content">
+                            <h3>شروع برنامه‌نویسی</h3>
+                            <p>یادگیری پایه‌های وب و اولین خط‌های کد.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <span class="timeline-dot"></span>
+                        <div class="timeline-content">
+                            <h3>اولین پروژه‌ی فریلنسری</h3>
+                            <p>اولین همکاری واقعی با یه کارفرما، و اولین تجربه‌ی تحویل پروژه.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <span class="timeline-dot"></span>
+                        <div class="timeline-content">
+                            <h3>ورود به هوش مصنوعی</h3>
+                            <p>گسترش مهارت‌ها به سمت توسعه‌ی ابزارهای مبتنی بر هوش مصنوعی.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <span class="timeline-dot"></span>
+                        <div class="timeline-content">
+                            <h3>تشکیل تیم توسعه</h3>
+                            <p>مدیریت یک گروه فریلنسری برای پروژه‌های بزرگ‌تر.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <span class="timeline-dot"></span>
+                        <div class="timeline-content">
+                            <h3>عبور از ۳۰ پروژه</h3>
+                            <p>امروز، با بیش از ۳۰ پروژه‌ی موفق تحویل‌شده.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ترمینال تعاملی -->
+        <section id="playground" class="playground">
+            <canvas class="matrix-canvas" id="matrixCanvas" aria-hidden="true"></canvas>
+            <div class="container">
+                <p class="section-eyebrow" dir="ltr">// try it yourself</p>
+                <h2 class="section-title glitch">امتحانش کن</h2>
+                <p class="section-desc">یه دستور بنویس و اینتر بزن. برای شروع <code dir="ltr">help</code> رو امتحان کن.</p>
+
+                <div class="terminal-window playground-terminal">
+                    <div class="terminal-titlebar">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                        <span class="terminal-title" dir="ltr">guest@portfolio:~</span>
+                    </div>
+                    <div class="terminal-body playground-body" id="playgroundOutput" dir="ltr"></div>
+                    <div class="playground-inputline" dir="ltr">
+                        <span class="term-prompt-sign">$</span>
+                        <input type="text" id="playgroundInput" class="playground-input" autocomplete="off" spellcheck="false" aria-label="ترمینال تعاملی - اینجا دستور بنویس">
+                        <span class="term-cursor">_</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تماس -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <p class="section-eyebrow" dir="ltr">// get in touch</p>
+                <h2 class="section-title glitch">تماس با من</h2>
+                <p class="section-desc">خوشحال میشم نظر یا پیشنهادت رو بشنوم.</p>
+
+                <div class="contact-grid">
+                    <a class="contact-cmd reveal" href="mailto:hossein@example.com">
+                        <span class="cmd-line" dir="ltr"><span class="cmd-prompt">$</span> send --to email</span>
+                        <span class="cmd-value" dir="ltr">mrhosein.ab@gmail.com</span>
+                    </a>
+                    <a class="contact-cmd reveal" href="">
+                        <span class="cmd-line" dir="ltr"><span class="cmd-prompt">$</span> call --now</span>
+                        <span class="cmd-value"></span>
+                    </a>
+                    <a class="contact-cmd reveal" href="https://github.com/Mr-Hosein" target="_blank" rel="noopener noreferrer">
+                        <span class="cmd-line" dir="ltr"><span class="cmd-prompt">$</span> open --github</span>
+                        <span class="cmd-value" dir="ltr">github.com/Mr-Hosein</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p dir="ltr" class="footer-line">// © 1405 حسین علی بخشی — ساخته‌شده در .</p>
+    </footer>
+
+    <script>
+        /* ============================
+           تایپ خودکار ترمینال Hero
+        ============================ */
+        const heroTerminal = document.getElementById('heroTerminal');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const heroLines = [
+            { type: 'prompt', text: 'whoami' },
+            { type: 'output', text: 'حسین علی بخشی' },
+            { type: 'prompt', text: 'cat role.txt' },
+            { type: 'output', text: 'برنامه نویس وب و توسعه‌دهنده‌ی ابزار های هوش مصنوعی' },
+            { type: 'prompt', text: './run_portfolio.sh' },
+            { type: 'output', text: 'در حال بارگذاری تجربه‌ها... done ✓' }
+        ];
+
+        function buildLineElement(kind) {
+            const line = document.createElement('div');
+            line.className = 'term-line ' + kind;
+            if (kind === 'prompt') {
+                const prompt = document.createElement('span');
+                prompt.className = 'term-prompt-sign';
+                prompt.textContent = '$ ';
+                line.appendChild(prompt);
+            } else {
+                const arrow = document.createElement('span');
+                arrow.className = 'term-output-sign';
+                arrow.textContent = '> ';
+                line.appendChild(arrow);
+            }
+            const textSpan = document.createElement('span');
+            textSpan.className = 'term-text';
+            textSpan.setAttribute('dir', 'auto');
+            line.appendChild(textSpan);
+            return { line, textSpan };
+        }
+
+        function typeLines(lines, index) {
+            if (index >= lines.length) {
+                const cursor = document.createElement('span');
+                cursor.className = 'term-cursor';
+                cursor.textContent = '_';
+                heroTerminal.appendChild(cursor);
+                return;
+            }
+
+            const { type, text } = lines[index];
+            const { line, textSpan } = buildLineElement(type);
+            heroTerminal.appendChild(line);
+
+            if (reduceMotion) {
+                textSpan.textContent = text;
+                setTimeout(() => typeLines(lines, index + 1), 150);
+                return;
+            }
+
+            let charIndex = 0;
+            const typeSpeed = type === 'prompt' ? 55 : 28;
+
+            function typeChar() {
+                if (charIndex <= text.length) {
+                    textSpan.textContent = text.slice(0, charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, typeSpeed);
+                } else {
+                    setTimeout(() => typeLines(lines, index + 1), type === 'prompt' ? 250 : 500);
+                }
+            }
+            typeChar();
+        }
+
+        typeLines(heroLines, 0);
+
+        /* ============================
+           انیمیشن ظاهر شدن هنگام اسکرول
+        ============================ */
+        const revealEls = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window && !reduceMotion) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => entry.target.classList.add('in-view'), i * 60);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealEls.forEach(el => observer.observe(el));
+        } else {
+            revealEls.forEach(el => el.classList.add('in-view'));
+        }
+
+        /* ============================
+           نوار پیشرفت اسکرول
+        ============================ */
+        const scrollProgress = document.getElementById('scrollProgress');
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            scrollProgress.style.width = percent + '%';
+        }
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+        updateScrollProgress();
+
+        /* ============================
+           فعال کردن تب فعلی بر اساس بخش دیده‌شده
+        ============================ */
+        const sections = document.querySelectorAll('main > section[id]');
+        const tabs = document.querySelectorAll('.ide-tab');
+        const ideTabsEl = document.getElementById('ideTabs');
+        const tabIndicator = document.getElementById('tabIndicator');
+
+        function moveIndicatorTo(tabEl) {
+            if (!tabEl || !tabIndicator || !ideTabsEl) return;
+            const tabsRect = ideTabsEl.getBoundingClientRect();
+            const rect = tabEl.getBoundingClientRect();
+            tabIndicator.style.width = rect.width + 'px';
+            tabIndicator.style.transform = 'translateX(' + (rect.left - tabsRect.left) + 'px)';
+        }
+
+        function setActiveTab(id) {
+            tabs.forEach(tab => {
+                const isActive = tab.dataset.target === id;
+                tab.classList.toggle('active', isActive);
+                if (isActive) moveIndicatorTo(tab);
+            });
+        }
+
+        if ('IntersectionObserver' in window) {
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveTab(entry.target.id);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            sections.forEach(sec => navObserver.observe(sec));
+        }
+
+        window.addEventListener('resize', () => {
+            const activeTab = document.querySelector('.ide-tab.active');
+            moveIndicatorTo(activeTab);
+        });
+
+        window.addEventListener('load', () => {
+            const activeTab = document.querySelector('.ide-tab.active');
+            moveIndicatorTo(activeTab);
+        });
+
+        /* ============================
+           افکت گلیچ روی تیتر بخش‌ها (یک‌بار، هنگام ورود به دید)
+        ============================ */
+        const glitchTitles = document.querySelectorAll('.section-title.glitch');
+        glitchTitles.forEach(title => {
+            title.dataset.text = title.textContent;
+        });
+
+        if ('IntersectionObserver' in window && !reduceMotion) {
+            const glitchObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('glitch-active');
+                        entry.target.addEventListener('animationend', () => {
+                            entry.target.classList.remove('glitch-active');
+                        }, { once: true });
+                        glitchObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.6 });
+
+            glitchTitles.forEach(title => glitchObserver.observe(title));
+        }
+
+        /* ============================
+           شمارنده‌ی اعداد (سن، تعداد پروژه‌ها) هنگام ورود به دید
+        ============================ */
+        const counters = document.querySelectorAll('.counter');
+
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target, 10) || 0;
+            const suffix = el.dataset.suffix || '';
+            const duration = 1200;
+            const startTime = performance.now();
+
+            function step(now) {
+                const progress = Math.min((now - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(eased * target);
+                el.textContent = current + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+
+            if (reduceMotion) {
+                el.textContent = target + suffix;
+            } else {
+                requestAnimationFrame(step);
+            }
+        }
+
+        if ('IntersectionObserver' in window) {
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => counterObserver.observe(c));
+        } else {
+            counters.forEach(animateCounter);
+        }
+
+        /* ============================
+           نور دنبال‌کننده‌ی موس (اتمسفر ترمینال)
+        ============================ */
+        const cursorGlow = document.getElementById('cursorGlow');
+        const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+        if (cursorGlow && isFinePointer && !reduceMotion) {
+            let glowX = window.innerWidth / 2;
+            let glowY = window.innerHeight / 2;
+            let targetX = glowX;
+            let targetY = glowY;
+
+            window.addEventListener('mousemove', (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            });
+
+            function animateGlow() {
+                glowX += (targetX - glowX) * 0.12;
+                glowY += (targetY - glowY) * 0.12;
+                cursorGlow.style.transform = 'translate(' + glowX + 'px,' + glowY + 'px)';
+                requestAnimationFrame(animateGlow);
+            }
+            animateGlow();
+        } else if (cursorGlow) {
+            cursorGlow.style.display = 'none';
+        }
+
+        /* ============================
+           دکمه‌های مغناطیسی (Hero + دکمه‌های اصلی)
+        ============================ */
+        const magneticEls = document.querySelectorAll('.btn-primary, .btn-ghost');
+
+        if (isFinePointer && !reduceMotion) {
+            magneticEls.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    el.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.35) + 'px)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'translate(0,0)';
+                });
+            });
+        }
+
+        /* ============================
+           چرخش سه‌بعدی کارت‌های پروژه با موس
+        ============================ */
+        const tiltCards = document.querySelectorAll('.project-card');
+
+        if (isFinePointer && !reduceMotion) {
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width - 0.5;
+                    const py = (e.clientY - rect.top) / rect.height - 0.5;
+                    const rotateX = (py * -8).toFixed(2);
+                    const rotateY = (px * 8).toFixed(2);
+                    card.style.transform =
+                        'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-6px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        /* ============================
+           آمار زنده‌ی گیت‌هاب (GitHub API)
+        ============================ */
+        let statsDataReady = false;
+        let statsVisible = false;
+
+        function maybeAnimateStats() {
+            if (!statsDataReady || !statsVisible) return;
+            ['statRepos', 'statFollowers', 'statStars'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el && !el.dataset.animated) {
+                    el.dataset.animated = 'true';
+                    animateCounter(el);
+                }
+            });
+        }
+
+        const statsSection = document.getElementById('stats');
+        if (statsSection && 'IntersectionObserver' in window) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statsVisible = true;
+                        maybeAnimateStats();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            statsObserver.observe(statsSection);
+        } else {
+            statsVisible = true;
+        }
+
+        function setStat(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.dataset.target = value;
+        }
+
+        async function loadGithubStats() {
+            try {
+                const userRes = await fetch('https://api.github.com/users/Mr-Hosein');
+                if (!userRes.ok) throw new Error('user fetch failed');
+                const user = await userRes.json();
+
+                let totalStars = 0;
+                try {
+                    const reposRes = await fetch('https://api.github.com/users/Mr-Hosein/repos?per_page=100');
+                    if (reposRes.ok) {
+                        const repos = await reposRes.json();
+                        if (Array.isArray(repos)) {
+                            totalStars = repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+                        }
+                    }
+                } catch (e) { /* اگه استارها نگرفتیم، مشکلی نیست */ }
+
+                setStat('statRepos', user.public_repos || 0);
+                setStat('statFollowers', user.followers || 0);
+                setStat('statStars', totalStars);
+                statsDataReady = true;
+                maybeAnimateStats();
+            } catch (err) {
+                const fallback = document.getElementById('statsFallback');
+                const grid = document.getElementById('statsGrid');
+                if (fallback) fallback.hidden = false;
+                if (grid) grid.style.display = 'none';
+            }
+        }
+
+        loadGithubStats();
+
+        /* ============================
+           افکت باران ماتریکس (پس‌زمینه‌ی بخش Playground)
+        ============================ */
+        const matrixCanvas = document.getElementById('matrixCanvas');
+        let playgroundVisible = false;
+
+        if (matrixCanvas && !reduceMotion) {
+            const ctx = matrixCanvas.getContext('2d');
+            let columns = 0;
+            let drops = [];
+            const fontSize = 18;
+            const matrixChars = 'アイウエオカキクケコ01ABCDEFXYZ$#@%&';
+
+            function resizeMatrix() {
+                matrixCanvas.width = matrixCanvas.offsetWidth;
+                matrixCanvas.height = matrixCanvas.offsetHeight;
+                columns = Math.max(1, Math.floor(matrixCanvas.width / fontSize));
+                drops = new Array(columns).fill(1);
+            }
+            resizeMatrix();
+            window.addEventListener('resize', resizeMatrix);
+
+            function drawMatrix() {
+                if (playgroundVisible) {
+                    ctx.fillStyle = 'rgba(7, 9, 10, 0.08)';
+                    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+                    ctx.fillStyle = 'rgba(61, 220, 115, 0.55)';
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                        if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                }
+                requestAnimationFrame(drawMatrix);
+            }
+            drawMatrix();
+
+            const playgroundSection = document.getElementById('playground');
+            if (playgroundSection && 'IntersectionObserver' in window) {
+                new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { playgroundVisible = entry.isIntersecting; });
+                }, { threshold: 0.05 }).observe(playgroundSection);
+            } else {
+                playgroundVisible = true;
+            }
+        } else if (matrixCanvas) {
+            matrixCanvas.style.display = 'none';
+        }
+
+        /* ============================
+           ترمینال تعاملی (Playground)
+        ============================ */
+        const pgOutput = document.getElementById('playgroundOutput');
+        const pgInput = document.getElementById('playgroundInput');
+
+        function pgPrint(text, cls) {
+            const div = document.createElement('div');
+            div.className = 'term-line ' + (cls || 'output');
+            div.dir = 'auto';
+            div.textContent = text;
+            pgOutput.appendChild(div);
+            pgOutput.scrollTop = pgOutput.scrollHeight;
+        }
+
+        function pgPrintPrompt(cmd) {
+            const div = document.createElement('div');
+            div.className = 'term-line prompt';
+            const sign = document.createElement('span');
+            sign.className = 'term-prompt-sign';
+            sign.textContent = '$ ';
+            const text = document.createElement('span');
+            text.className = 'term-text';
+            text.textContent = cmd;
+            div.appendChild(sign);
+            div.appendChild(text);
+            pgOutput.appendChild(div);
+            pgOutput.scrollTop = pgOutput.scrollHeight;
+        }
+
+        const pgCommands = {
+            whoami: 'guest — یه بازدیدکننده‌ی کنجکاو 🙂',
+            skills: 'Python, JavaScript, HTML/CSS, PHP, C#, Git, Linux, AI, MySQL, Bootstrap',
+            projects: 'برای دیدن نمونه‌کارها بنویس: open projects',
+            contact: 'ایمیل: mrhosein.ab@gmail.com',
+            github: 'github.com/Mr-Hosein',
+            joke: 'یه باگ وارد بار شد... و کل سیستم کرش کرد 😄'
+        };
+
+        function pgHelpText() {
+            return 'دستورهای موجود: help, whoami, skills, projects, contact, github, joke, open <section>, clear';
+        }
+
+        function runPgCommand(raw) {
+            const cmd = raw.trim();
+            if (!cmd) return;
+            pgPrintPrompt(cmd);
+
+            const lower = cmd.toLowerCase();
+
+            if (lower === 'clear') {
+                pgOutput.innerHTML = '';
+                return;
+            }
+            if (lower === 'help') {
+                pgPrint(pgHelpText());
+                return;
+            }
+            if (lower === 'sudo hire-me' || lower === 'sudo hire me') {
+                pgPrint('✅ درخواست ثبت شد؛ برو بخش contact.sh و پیام بده!');
+                return;
+            }
+            if (lower.startsWith('open ')) {
+                const target = lower.replace('open', '').trim();
+                const map = { home: 'home', projects: 'projects', about: 'about', contact: 'contact', career: 'career', stats: 'stats', workflow: 'workflow' };
+                const dest = map[target];
+                if (dest) {
+                    const el = document.getElementById(dest);
+                    if (el) el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+                    pgPrint('در حال رفتن به ' + target + ' ...');
+                } else {
+                    pgPrint('bash: open: بخش «' + target + '» پیدا نشد');
+                }
+                return;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(pgCommands, lower)) {
+                pgPrint(pgCommands[lower]);
+            } else {
+                pgPrint('command not found: ' + cmd + ' — برای راهنما بنویس help');
+            }
+        }
+
+        if (pgInput && pgOutput) {
+            pgPrint('به ترمینال خوش اومدی! برای شروع بنویس: help');
+            pgInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    runPgCommand(pgInput.value);
+                    pgInput.value = '';
+                }
+            });
+
+            const playgroundTerminalEl = document.querySelector('.playground-terminal');
+            if (playgroundTerminalEl) {
+                playgroundTerminalEl.addEventListener('click', () => pgInput.focus());
+            }
+        }
+    </script>
+</body>
+</html>
