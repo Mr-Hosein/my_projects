@@ -1,5 +1,5 @@
-<svg width="360" height="110" viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg">
-  <rect x="1" y="1" width="358" height="108" rx="14" fill="#0D0D0D" stroke="#3a1414" stroke-width="1.5"/>
+<svg width="360" height="250" viewBox="0 0 360 250" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="358" height="248" rx="14" fill="#0D0D0D" stroke="#3a1414" stroke-width="1.5"/>
 
   <circle cx="24" cy="24" r="5" fill="#ff5f56"/>
   <circle cx="42" cy="24" r="5" fill="#ffb454"/>
@@ -8,5 +8,35 @@
   <line x1="0" y1="42" x2="360" y2="42" stroke="#3a1414" stroke-width="1"/>
 
   <text x="28" y="62" font-family="JetBrains Mono, Consolas, monospace" font-size="13" fill="#FF3B3B">$ cat languages.json</text>
-  <text x="28" y="80" font-family="JetBrains Mono, Consolas, monospace" font-size="12" fill="#8ea08b">no language data yet</text>
+  
+        <circle cx="28" cy="73" r="5" fill="#e34c26"/>
+        <text x="42" y="78" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">HTML</text>
+        <text x="336" y="78" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">48.8%</text>
+        <rect x="42" y="84" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="84" width="92.6734115965139" height="6" rx="3" fill="#e34c26"/>
+        <circle cx="28" cy="103" r="5" fill="#3178c6"/>
+        <text x="42" y="108" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">TypeScript</text>
+        <text x="336" y="108" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">27.6%</text>
+        <rect x="42" y="114" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="114" width="52.39050944381822" height="6" rx="3" fill="#3178c6"/>
+        <circle cx="28" cy="133" r="5" fill="#563d7c"/>
+        <text x="42" y="138" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">CSS</text>
+        <text x="336" y="138" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">14.7%</text>
+        <rect x="42" y="144" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="144" width="27.99824045308333" height="6" rx="3" fill="#563d7c"/>
+        <circle cx="28" cy="163" r="5" fill="#4F5D95"/>
+        <text x="42" y="168" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">PHP</text>
+        <text x="336" y="168" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">5.8%</text>
+        <rect x="42" y="174" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="174" width="10.943557034063728" height="6" rx="3" fill="#4F5D95"/>
+        <circle cx="28" cy="193" r="5" fill="#3572A5"/>
+        <text x="42" y="198" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">Python</text>
+        <text x="336" y="198" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">2.0%</text>
+        <rect x="42" y="204" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="204" width="3.8946471283644457" height="6" rx="3" fill="#3572A5"/>
+        <circle cx="28" cy="223" r="5" fill="#f1e05a"/>
+        <text x="42" y="228" font-family="JetBrains Mono, Consolas, monospace" font-size="12.5" fill="#dcead8">JavaScript</text>
+        <text x="336" y="228" font-family="JetBrains Mono, Consolas, monospace" font-size="11.5" fill="#8ea08b" text-anchor="end">0.7%</text>
+        <rect x="42" y="234" width="190" height="6" rx="3" fill="#1f2b1f"/>
+        <rect x="42" y="234" width="2" height="6" rx="3" fill="#f1e05a"/>
 </svg>
