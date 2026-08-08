@@ -142,7 +142,7 @@ $ echo $MOTTO
 
 <div align="center">
 
-<a href="mailto:hossein@example.com"><img src="https://img.shields.io/badge/Email-FF3B3B?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+<a href="https://mrhosein.ab@gmail.com"><img src="https://img.shields.io/badge/Email-FF3B3B?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 <a href="https://github.com/Mr-Hosein"><img src="https://img.shields.io/badge/GitHub-0D0D0D?style=for-the-badge&logo=github&logoColor=FF3B3B" /></a>
 <a href="https://www.youtube.com/@hosein_ai"><img src="https://img.shields.io/badge/YouTube-FF3B3B?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 <a href="https://mr-hosein.github.io/my_projects/"><img src="https://img.shields.io/badge/Portfolio-0D0D0D?style=for-the-badge&logo=googlechrome&logoColor=FF3B3B" /></a>
