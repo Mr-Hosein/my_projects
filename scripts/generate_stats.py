@@ -99,7 +99,7 @@ def esc(text):
 # ساخت SVG کارت آمار اصلی
 # ---------------------------------------------------------------
 def build_stats_svg(public_repos, followers, total_stars, total_forks):
-    width, height = 420, 190
+    width, height = 420, 214
     stats = [
         ("Public Repos", public_repos),
         ("Followers", followers),
@@ -109,7 +109,7 @@ def build_stats_svg(public_repos, followers, total_stars, total_forks):
 
     rows = ""
     for i, (label, value) in enumerate(stats):
-        y = 78 + i * 26
+        y = 102 + i * 26
         rows += f'''
         <text x="28" y="{y}" font-family="JetBrains Mono, Consolas, monospace" font-size="14" fill="#8ea08b">{esc(label)}</text>
         <text x="392" y="{y}" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="700" fill="#FF3B3B" text-anchor="end">{esc(value)}</text>'''
