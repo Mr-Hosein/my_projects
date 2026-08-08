@@ -1,0 +1,12 @@
+<svg width="360" height="110" viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="358" height="108" rx="14" fill="#0D0D0D" stroke="#3a1414" stroke-width="1.5"/>
+
+  <circle cx="24" cy="24" r="5" fill="#ff5f56"/>
+  <circle cx="42" cy="24" r="5" fill="#ffb454"/>
+  <circle cx="60" cy="24" r="5" fill="#2ecc71"/>
+  <text x="180.0" y="29" font-family="JetBrains Mono, Consolas, monospace" font-size="12" fill="#5c6b5a" text-anchor="middle">top --languages</text>
+  <line x1="0" y1="42" x2="360" y2="42" stroke="#3a1414" stroke-width="1"/>
+
+  <text x="28" y="62" font-family="JetBrains Mono, Consolas, monospace" font-size="13" fill="#FF3B3B">$ cat languages.json</text>
+  <text x="28" y="80" font-family="JetBrains Mono, Consolas, monospace" font-size="12" fill="#8ea08b">no language data yet</text>
+</svg>

@@ -129,10 +129,12 @@ $ echo $MOTTO
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Mr-Hosein&show_icons=true&theme=radical&hide_border=true&bg_color=0D0D0D&title_color=FF3B3B&icon_color=FF3B3B&text_color=E0E0E0" width="48%"/>
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mr-Hosein&layout=compact&theme=radical&hide_border=true&bg_color=0D0D0D&title_color=FF3B3B&text_color=E0E0E0" width="38%"/>
+<img src="assets/github-stats.svg" width="48%"/>
+<img src="assets/top-langs.svg" width="38%"/>
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=Mr-Hosein&theme=radical&hide_border=true&background=0D0D0D&ring=FF3B3B&fire=FF3B3B&currStreakLabel=FF3B3B" width="60%"/>
+
+<p><sub>کارت‌های بالا (به‌جز streak) رو یه اسکریپت پایتون خودمون می‌سازه، مستقیم از API خود گیت‌هاب — بدون هیچ سرویس واسطه‌ی خارجی. هر ۱۲ ساعت خودکار به‌روز میشه. کد کامل: <a href="scripts/generate_stats.py">scripts/generate_stats.py</a></sub></p>
 
 </div>
 
@@ -142,7 +144,7 @@ $ echo $MOTTO
 
 <div align="center">
 
-<a href="https://mrhosein.ab@gmail.com"><img src="https://img.shields.io/badge/Email-FF3B3B?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+<a href="mailto:hossein@example.com"><img src="https://img.shields.io/badge/Email-FF3B3B?style=for-the-badge&logo=gmail&logoColor=white" /></a>
 <a href="https://github.com/Mr-Hosein"><img src="https://img.shields.io/badge/GitHub-0D0D0D?style=for-the-badge&logo=github&logoColor=FF3B3B" /></a>
 <a href="https://www.youtube.com/@hosein_ai"><img src="https://img.shields.io/badge/YouTube-FF3B3B?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 <a href="https://mr-hosein.github.io/my_projects/"><img src="https://img.shields.io/badge/Portfolio-0D0D0D?style=for-the-badge&logo=googlechrome&logoColor=FF3B3B" /></a>
