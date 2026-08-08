@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D0D0D,100:FF3B3B&height=230&section=header&text=Hossein%20Ali%20Bakhshi&fontSize=46&fontColor=FFFFFF&fontAlignY=36&desc=Frontend%20%26%20Python%20Developer%20%7C%20AI%20Automation&descAlignY=54&descColor=FF9E9E&animation=fadeIn" width="100%"/>
+<img src="assets/banner-header.svg" width="100%"/>
 
 <img src="https://readme-typing-svg.demolab.com/?font=JetBrains+Mono&weight=600&size=22&duration=2200&pause=700&color=FF3B3B&center=true&vCenter=true&width=680&lines=%24+whoami;%3E+Frontend+%26+Backend+Developer;%24+cat+skills.txt;%3E+Python+%7C+JavaScript+%7C+AI+Automation;%24+.%2Frun_portfolio.sh;%3E+status%3A+available_for_work+%E2%9C%93" alt="Typing SVG"/>
 
@@ -158,6 +158,6 @@ $ echo "thanks for stopping by"
 > ⭐ اگه از پروژه‌ها خوشت اومد، یه استار به ریپو بده!
 ```
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FF3B3B,100:0D0D0D&height=120&section=footer" width="100%"/>
+<img src="assets/banner-footer.svg" width="100%"/>
 
 </div>
