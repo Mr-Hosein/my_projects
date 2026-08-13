@@ -11,7 +11,7 @@
   <text x="28" y="66" font-family="JetBrains Mono, Consolas, monospace" font-size="13" fill="#FF3B3B">$ curl api.github.com/users/Mr-Hosein</text>
   
         <text x="28" y="102" font-family="JetBrains Mono, Consolas, monospace" font-size="14" fill="#8ea08b">Public Repos</text>
-        <text x="392" y="102" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="700" fill="#FF3B3B" text-anchor="end">19</text>
+        <text x="392" y="102" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="700" fill="#FF3B3B" text-anchor="end">20</text>
         <text x="28" y="128" font-family="JetBrains Mono, Consolas, monospace" font-size="14" fill="#8ea08b">Followers</text>
         <text x="392" y="128" font-family="JetBrains Mono, Consolas, monospace" font-size="14" font-weight="700" fill="#FF3B3B" text-anchor="end">1</text>
         <text x="28" y="154" font-family="JetBrains Mono, Consolas, monospace" font-size="14" fill="#8ea08b">Total Stars</text>
